@@ -3,7 +3,7 @@ import './SideBar.css';
 import styled from 'styled-components';
 import NavItems from './NavItems'
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-import logo from './app_icon_1.png';
+import logo from './icon1.png';
 
 /* This defines the actual bar going down the screen */
 const StyledSideNav = styled.div`
@@ -12,9 +12,10 @@ const StyledSideNav = styled.div`
   width: 25%;     /* Set the width of the sidebar */
   z-index: 1;      /* Stay on top of everything */
   /*top: 3.4em; */     /* Stay at the top */
-  background-color: #004d4d; /* Black */
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(0,13,26,1));
   /*overflow-x: hidden;*/     /* Disable horizontal scroll */
-  
+  //opacity:0.9;
+  box-shadow: 1px 1px 10px #000d1a;
 `;
 
 const NavItemsContainer = styled.div`
@@ -29,10 +30,18 @@ const containerstyle = {
 
 const AppIcon = styled.div`
     width: 100%;
-    height:45%;
-    background-image: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,0,0,0));
+    height:55%;
+    padding 3%
+    
 `;
 
+const NavLinks = styled.div`
+width: 100%;
+height: 45%;
+overflow-x:hidden;
+overflow-y: scroll;
+//background-color: #000d1a; /* Black */
+`;
 
 class Icon extends React.Component{
     render(){
@@ -53,21 +62,34 @@ class SideNav extends React.Component {
                     path: '/', /* path is used as id to check which NavItem is active basically */
                     name: 'Home',
                     value: 'Home',
-                    /*css: 'fa fa-home',*/
+                    css: 'fa fa-home',
                     key: 1 /* Key is required, else console throws error. Does this please you Mr. Browser?! */
+                },
+                {
+                    path: '/packages',
+                    name: 'Packages',
+                    value: 'About',
+                    css: 'fa fa-suitcase',
+                    key: 2
                 },
                 {
                     path: '/about',
                     name: 'About',
                     value: 'About',
-                    /*css: 'fa fa-book',*/
-                    key: 2
+                    css: 'fa fa-book',
+                    key: 3
+                },{
+                    path: '/contact',
+                    name: 'Contact Us',
+                    value: 'Contact',
+                    css: 'fa fa-address-card',
+                    key: 4
                 },{
                     path: '/join',
                     name: 'How To join',
                     value: 'How to join',
-                    /*css: 'fa fa-users ',*/
-                    key: 3
+                    css: 'fa fa-users ',
+                    key: 5
                 },
             ]
         }
@@ -87,7 +109,7 @@ class SideNav extends React.Component {
             <AppIcon>
                 <Icon></Icon>
             </AppIcon>
-
+            <NavLinks>
                 {
                     /* items = just array AND map() loops thru that array AND item is param of that loop */
                     items.map((item) => {
@@ -97,6 +119,7 @@ class SideNav extends React.Component {
                         )
                     })
                 }
+            </NavLinks>
             </StyledSideNav>
         );
     }

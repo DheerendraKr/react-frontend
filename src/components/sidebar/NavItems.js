@@ -26,17 +26,20 @@ export default class NavItems extends React.Component {
         `;
 
         const StyledNavItems = styled.div`
-            height: 10%;
+            height: 10vh;
             width: 100%; /* width must be same size as NavBar to center */
-            text-align: center; /* Aligns <a> inside of NavIcon div */
-            box-shadow: 1px 0px 3px #00e6e6;
+            text-align: left; /* Aligns <a> inside of NavIcon div */
+            //box-shadow: 1px 0px 3px #00e6e6;
+            padding-left: 10%;
             margin-bottom: 0;   /* Puts space between NavItems */
             padding-top:5%;
+            border-bottom: 2px solid #000;
             a {
                 font-size: 1.8em;
-                color: ${(props) => props.active ? "white" : "#9FFFCB"};
+                color: ${(props) => props.active ? "#e6005c" : "#fff"};
                 :hover {
                 opacity: 0.7;
+                color: #e6005c;
                 text-decoration: none; /* Gets rid of underlining of icons */
                 }  
             }
@@ -44,8 +47,8 @@ export default class NavItems extends React.Component {
 
         return (
             <StyledNavItems active={active}>
-                <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
-                <NavLabel>{this.props.name}</NavLabel>
+                <Link to={this.props.path}  onClick={this.handleClick}>
+                <NavLabel className={this.props.css}> &nbsp;&nbsp;{this.props.name}</NavLabel>
                 </Link>
             </StyledNavItems>
         );
