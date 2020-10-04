@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
+import React from 'react';
+import { Nav, Navbar} from 'react-bootstrap';
+import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 const Styles = styled.div`
     width:100%;
@@ -33,20 +34,67 @@ const UserLabel = styled.div`
   
 `;
 
-const user = "Login";
 
-export const HeadBar = () => (
-    <Styles>
-        <Navbar  style={{height:"100%"}} expand="lg">
-            <Navbar.Brand>
-                <h1>MBS</h1>
-                <h3>Marvelous Security Bussiness Plan</h3>
-            </Navbar.Brand>
-            <Nav className="ml-auto" >
-                <Nav.Item><Nav.Link href="/login">
-                    <h3 className="fa fa-user"> &nbsp;&nbsp;{user}</h3>
-                </Nav.Link></Nav.Item>
-            </Nav>
+class LoginNav extends React.Component{
+
+  user = {
+    userName: "Login",
+    navLink: "/login"
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activePath: this.props.location.pathname
+    }
+    if (this.props.userName) {
+      this.user.userName = this.props.userName;
+      this.user.navLink = "/profile"
+    }
+    //const location = useLocation();
+    console.log("ABC_______________-"+JSON.stringify(this.props));
+    
+    this.onItemClick = this.onItemClick.bind(this);
+  }
+
+  onItemClick = (to) => {
+    this.setState({ activePath:  to });
+  }
+
+  render(){
+
+    return(
+      <Link to={this.user.navLink}  onClick={this.onItemClick}>
+          <div className="fa fa-user"> &nbsp;&nbsp;{this.user.userName}</div>
+      </Link>
+    );
+
+  }
+}
+
+const LoginNavigation = withRouter(LoginNav);
+
+
+
+export default class HeadBar extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
+
+  render() {
+    return (
+      <Styles>
+        <Navbar style={{ height: "100%" }} expand="lg">
+          <Navbar.Brand>
+            <h1>MBS</h1>
+            <h3>Marvellous Bussiness Security Plan</h3>
+          </Navbar.Brand>
+          <Nav className="ml-auto" >
+            <LoginNavigation userName = {this.props.userName}/>
+          </Nav>
         </Navbar>
-    </Styles>
-)
+      </Styles>
+    );
+  }
+}

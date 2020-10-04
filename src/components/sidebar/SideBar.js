@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './SideBar.css';
 import styled from 'styled-components';
 import NavItems from './NavItems'
@@ -55,40 +55,75 @@ class SideNav extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log("Recieved from parent: "+props.userLoggedIn);
         this.state = {
             activePath: props.location.pathname,
-            items: [
+            items: (this.props.userLoggedIn)? [
                 {
                     path: '/', /* path is used as id to check which NavItem is active basically */
-                    name: 'Home',
-                    value: 'Home',
-                    css: 'fa fa-home',
+                    name: 'Dashboard',
+                    value: 'Dashboard',
+                    css: 'fa fa-tasks',
                     key: 1 /* Key is required, else console throws error. Does this please you Mr. Browser?! */
+                },{
+                    path: '/add-member',
+                    name: 'Add Member',
+                    value: 'add-member',
+                    css: 'fa fa-user-plus',
+                    key: 2
                 },
                 {
-                    path: '/packages',
-                    name: 'Packages',
-                    value: 'About',
-                    css: 'fa fa-suitcase',
-                    key: 2
+                    path: '/earnings',
+                    name: 'My Earnings',
+                    value: 'earnings',
+                    css: 'fa fa-trophy',
+                    key: 3
                 },
                 {
                     path: '/about',
                     name: 'About',
                     value: 'About',
                     css: 'fa fa-book',
-                    key: 3
+                    key: 4
                 },{
                     path: '/contact',
                     name: 'Contact Us',
                     value: 'Contact',
                     css: 'fa fa-address-card',
-                    key: 4
-                },{
+                    key: 5
+                },
+            ] : [
+                {
+                    path: '/', /* path is used as id to check which NavItem is active basically */
+                    name: 'Home',
+                    value: 'Home',
+                    css: 'fa fa-home',
+                    key: 1 /* Key is required, else console throws error. Does this please you Mr. Browser?! */
+                }, {
                     path: '/join',
                     name: 'How To join',
                     value: 'How to join',
                     css: 'fa fa-users ',
+                    key: 2
+                },
+                {
+                    path: '/packages',
+                    name: 'Packages',
+                    value: 'About',
+                    css: 'fa fa-suitcase',
+                    key: 3
+                },
+                {
+                    path: '/about',
+                    name: 'About',
+                    value: 'About',
+                    css: 'fa fa-book',
+                    key: 4
+                },{
+                    path: '/contact',
+                    name: 'Contact Us',
+                    value: 'Contact',
+                    css: 'fa fa-address-card',
                     key: 5
                 },
             ]
@@ -97,6 +132,7 @@ class SideNav extends React.Component {
     }
 
     onItemClick = (path) => {
+        console.log("Path-------------------"+path);
         this.setState({ activePath: path }); /* Sets activePath which causes rerender which causes CSS to change */
     }
 
@@ -106,6 +142,7 @@ class SideNav extends React.Component {
 
         return (
             <StyledSideNav>
+                
             <AppIcon>
                 <Icon></Icon>
             </AppIcon>
@@ -128,10 +165,10 @@ class SideNav extends React.Component {
 const RouterSideNav = withRouter(SideNav);
 
 class SideBar extends React.Component {
+    constructor(props){super(props);}
     render() {
         return (
-            
-            <RouterSideNav></RouterSideNav>
+            <RouterSideNav userLoggedIn={this.props.userLoggedIn}></RouterSideNav>
         );
     }
 }

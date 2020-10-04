@@ -88,7 +88,11 @@ export const Home = () => (
         <HomeDetails>
             <ImageDivision><img src={ourService} width="100%" height="100%"/></ImageDivision>
             <DescriptionDivision>
-                <b>Our Services</b>
+                <b>Our Services</b><br/>
+                <p><li>Home use products</li>
+                <li>Spices</li>
+                <li>Clothes</li>
+                and others</p>
             </DescriptionDivision>
         </HomeDetails>
         <HomeDetails>

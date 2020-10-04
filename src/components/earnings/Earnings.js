@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-const ContactContent = styled.div`
+const EarningContent = styled.div`
     min-height: 50%;
     width: 80%;
     margin-left: 10%
@@ -20,21 +20,16 @@ const ContactContent = styled.div`
     }
 `;
 
-class Contact extends React.Component{
+
+export default class Earnings extends React.Component{
     render(){
         return(
-            <ContactContent>
-                <h2>Our Address</h2>
+            <EarningContent>
+                <h2>Your Total Earnings</h2>
                 <p>
-                    1609, Udhana Main Road,<br />
-                    Near krishna petrolpump,<br />
-                    Shashtri nagar society, Aman Nagar,<br />
-                    Surat, Gujrat<br />
-                    PinCode: 395002
+                    Adding soon....
                 </p>
-            </ContactContent>
+            </EarningContent>
         );
     }
 }
-
-export default Contact;
